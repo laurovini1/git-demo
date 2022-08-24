@@ -7,8 +7,8 @@ function getUsers(){
         .catch(error => console.error(error))
 }
 
-function getUser(){
-    fetch(`${url}/1`)
+function getUser(id) {
+    fetch(`${url}/${id}`)
     .then(response => response.json())
     .then(data => {
         userName.textContent = data.name
@@ -31,8 +31,8 @@ function addUser(newUser){
         .catch(error => console.log(error))
 }
 
-function updateUser(updatedUser) {
-    fetch(`${url}/1`, {
+function updateUser(updatedUser, id) {
+    fetch(`${url}/${id}`, {
         method: "PUT",
         body: JSON.stringify(updatedUser),
         headers: {
@@ -44,6 +44,18 @@ function updateUser(updatedUser) {
         .catch(error => console.log(error))
 }
 
+function deleteUser(id){
+    fetch(`${url}/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then(response => response.json())
+    then(data => alertApi.textContent = data)
+    .catch(error => console.log(error))
+}
+
 const newUser = {
     name: "Ricardo Goulart",
     avatar: "https://picsum.photos/200/300",
@@ -51,12 +63,13 @@ const newUser = {
 }
 
 const updatedUser = {
-    name: "Everton Ribeiro",
+    name: "Fábio",
     avatar: "https://picsum.photos/200/300",
-    city: "Belo Horizonte"
+    city: "Guapé"
 }
 
-updateUser(updateUser)
-getUser()
+//updateUser(updatedUser, 11)
+getUser(2)
 getUsers()
 //addUser(newUser)
+deleteUser(6)
